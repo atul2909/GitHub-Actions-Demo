@@ -1,0 +1,35 @@
+name: Continuous Delivery Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  # Step A: Automated CI Check
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Build & Tests
+        run: |
+          echo "Building application binaries..."
+          echo "Running automated test suites..."
+
+  # Step B: Guarded CD Deployment
+  deploy-to-production:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    # THIS IS THE KEY LINK:
+    # GHA pauses here and checks GitHub.com environment settings
+    environment:
+      name: production
+      url: https://app.example.com  # Displays a direct link on the GitHub run page once deployed
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Application
+        env:
+          API_KEY: ${{ secrets.PROD_API_KEY }}
+        run: |
+          echo "Deployment approved! Executing release to production..."
