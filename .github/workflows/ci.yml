@@ -20,8 +20,11 @@ jobs:
   ci:
     name: Build, Test & Push Image
     runs-on: ubuntu-latest
-
+    environment: production
+    
     steps:
+      - name: Printers
+        run: echo "${{vars.PRINTO}}"
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
@@ -35,7 +38,16 @@ jobs:
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+        with: ${{secrets.ATUL_LOGIN}}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
+      - name: Printer
+        run: |
+          echo "running in ${{github.repository}}"
+          echo "running in ${{github.sha}}"
+          echo "running in ${{runner.os}}"
+          
+          
 
