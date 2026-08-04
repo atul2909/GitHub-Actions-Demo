@@ -1,4 +1,4 @@
-name: CI Pipeline - Build & Push to ECR
+name: CI Pipeline - Build & Push to ECRs
 
 on:
   push:
