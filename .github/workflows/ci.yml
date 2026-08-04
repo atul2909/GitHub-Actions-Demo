@@ -14,7 +14,7 @@ permissions:
 env:
   AWS_REGION: us-east-1
   ROLE_TO_ASSUME: arn:aws:iam::042357172638:role/github-actions-ecr-role
-  ECR_REPOSITORY: atul2909/gha-demo
+  ECR_REPOSITORY: 042357172638.dkr.ecr.us-east-1.amazonaws.com/atul2909/gha-demo
 
 jobs:
   ci:
